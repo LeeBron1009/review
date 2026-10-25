@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#0b1020">
+<title>學測自然科複習站</title>
+<style>
+:root{--bg:#0b1020;--bg2:#121a33;--card:rgba(255,255,255,.06);--line:rgba(255,255,255,.12);--text:#e8ecff;--sub:#9aa6d1;--accent:#6ea8ff;--accent2:#b36bff;--ok:#3ddc97;--shadow:0 10px 30px rgba(0,0,0,.45)}
+body.light{--bg:#eef2ff;--bg2:#ffffff;--card:rgba(255,255,255,.75);--line:rgba(30,40,90,.14);--text:#141a3a;--sub:#5a6492;--shadow:0 10px 30px rgba(60,80,160,.18)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;font-family:system-ui,"Noto Sans TC","Microsoft JhengHei",sans-serif;color:var(--text);background:radial-gradient(900px 500px at 10% -10%,rgba(110,168,255,.25),transparent),radial-gradient(800px 500px at 100% 0%,rgba(179,107,255,.22),transparent),var(--bg);min-height:100vh;padding-bottom:120px}
+.wrap{max-width:760px;margin:0 auto;padding:18px 16px}
+header.top{position:sticky;top:0;z-index:20;backdrop-filter:blur(14px);background:color-mix(in srgb,var(--bg) 70%,transparent);border-bottom:1px solid var(--line)}
+header.top .wrap{display:flex;align-items:center;gap:10px;padding:12px 16px}
+.logo{font-weight:800;letter-spacing:.5px;background:linear-gradient(90deg,var(--accent),var(--accent2));-webkit-background-clip:text;background-clip:text;color:transparent;font-size:18px}
+.back{border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:12px;padding:6px 12px;cursor:pointer;font-size:14px;display:none}
+h1{font-size:26px;margin:8px 0 4px}
+.sub{color:var(--sub);font-size:14px;margin:0 0 16px}
+.glass{background:var(--card);border:1px solid var(--line);border-radius:20px;backdrop-filter:blur(12px);box-shadow:var(--shadow)}
+.ring-box{display:flex;align-items:center;gap:16px;padding:16px;margin-bottom:18px}
+.ring{--p:0;width:78px;height:78px;border-radius:50%;background:conic-gradient(var(--accent) calc(var(--p)*1%),var(--line) 0);display:grid;place-items:center;flex:none}
+.ring span{width:62px;height:62px;border-radius:50%;background:var(--bg2);display:grid;place-items:center;font-weight:800}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.scard{padding:18px 14px;cursor:pointer;position:relative;overflow:hidden;transition:transform .2s,border-color .2s;min-height:150px}
+.scard:hover{transform:translateY(-4px);border-color:var(--c)}
+.scard::after{content:"";position:absolute;right:-30px;top:-30px;width:110px;height:110px;border-radius:50%;background:var(--c);opacity:.18;filter:blur(8px)}
+.scard .ic{font-size:30px}
+.scard h3{margin:8px 0 2px;font-size:20px}
+.scard small{color:var(--sub)}
+.bar{height:6px;background:var(--line);border-radius:6px;margin-top:12px;overflow:hidden}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--c,var(--accent)),var(--accent2));border-radius:6px;transition:width .4s}
+.soon{border-style:dashed;opacity:.85}
+.tag{display:inline-block;font-size:12px;padding:2px 8px;border-radius:20px;border:1px solid var(--line);color:var(--sub)}
+.tabs{display:flex;gap:8px;margin:6px 0 14px;overflow:auto}
+.tab{padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--sub);cursor:pointer;white-space:nowrap;font-size:14px}
+.tab.on{color:#fff;background:linear-gradient(90deg,var(--accent),var(--accent2));border-color:transparent}
+.unit{margin-bottom:14px;overflow:hidden}
+.unit>.uh{display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer}
+.num{width:34px;height:34px;border-radius:10px;display:grid;place-items:center;font-weight:800;background:linear-gradient(135deg,var(--c),var(--accent2));color:#fff;flex:none}
+.uh .t{flex:1;font-weight:700;line-height:1.35}
+.uh .t small{display:block;color:var(--sub);font-weight:400;margin-top:2px}
+.chev{transition:transform .25s;color:var(--sub)}
+.unit.open .chev{transform:rotate(90deg)}
+.items{display:none;border-top:1px solid var(--line)}
+.unit.open .items{display:block}
+.item{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid var(--line);cursor:pointer}
+.item:last-child{border-bottom:0}
+.item:hover{background:rgba(110,168,255,.08)}
+.chk{width:22px;height:22px;border-radius:7px;border:2px solid var(--line);display:grid;place-items:center;flex:none;font-size:13px;color:transparent}
+.chk.on{background:var(--ok);border-color:var(--ok);color:#06231a}
+.stars{color:#ffc857;font-size:12px;letter-spacing:1px}
+.ph{padding:30px 18px;text-align:center;color:var(--sub);border:2px dashed var(--line);border-radius:20px;margin-top:10px}
+.ph b{display:block;font-size:20px;color:var(--text);margin-bottom:6px}
+.sec{padding:16px;margin-bottom:14px}
+.sec h3{margin:0 0 10px;font-size:16px}
+.empty{color:var(--sub);font-size:14px;border:1px dashed var(--line);border-radius:14px;padding:14px;text-align:center}
+textarea{width:100%;min-height:110px;background:transparent;color:var(--text);border:1px solid var(--line);border-radius:14px;padding:12px;font:inherit;resize:vertical}
+.btn{border:0;border-radius:14px;padding:12px 16px;color:#fff;font-weight:700;cursor:pointer;background:linear-gradient(90deg,var(--accent),var(--accent2));width:100%}
+.btn.ghost{background:var(--card);border:1px solid var(--line);color:var(--text)}
+.mm{display:flex;align-items:center;overflow:auto;padding:6px 0}
+.mm .root{flex:none;padding:12px 14px;border-radius:16px;background:linear-gradient(135deg,var(--c),var(--accent2));color:#fff;font-weight:800;max-width:120px;text-align:center;font-size:14px}
+.mm .kids{margin-left:26px;position:relative;display:flex;flex-direction:column;gap:8px}
+.mm .kids::before{content:"";position:absolute;left:-14px;top:18px;bottom:18px;border-left:2px solid var(--line)}
+.mm .kid{position:relative;padding:8px 12px;border:1px solid var(--line);border-radius:12px;background:var(--card);font-size:13px;min-width:150px;cursor:pointer}
+.mm .kid::before{content:"";position:absolute;left:-14px;top:50%;width:14px;border-top:2px solid var(--line)}
+.mm .kids::after{content:"";position:absolute;left:-26px;top:50%;width:12px;border-top:2px solid var(--line)}
+.mm .kid.done{border-color:var(--ok)}
+.quiz-q{margin-bottom:12px}
+.opt{display:block;width:100%;text-align:left;margin-top:6px;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--text);cursor:pointer;font:inherit}
+.opt.right{border-color:var(--ok);background:rgba(61,220,151,.15)}
+.opt.wrong{border-color:#ff6b81;background:rgba(255,107,129,.15)}
+.fab-wrap{position:fixed;right:18px;bottom:calc(20px + env(safe-area-inset-bottom));z-index:50;display:flex;flex-direction:column;align-items:center;gap:12px}
+.fab{width:60px;height:60px;border-radius:50%;border:0;color:#fff;font-size:26px;cursor:pointer;background:linear-gradient(135deg,var(--accent),var(--accent2));box-shadow:0 8px 28px rgba(110,168,255,.55),0 0 0 6px rgba(110,168,255,.15);transition:transform .3s}
+.fab-wrap.open .fab{transform:rotate(135deg)}
+.mini{width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:var(--bg2);color:var(--text);font-size:20px;cursor:pointer;box-shadow:var(--shadow);opacity:0;transform:translateY(20px) scale(.6);pointer-events:none;transition:.25s}
+.fab-wrap.open .mini{opacity:1;transform:none;pointer-events:auto}
+.fab-wrap.open .mini:nth-child(3){transition-delay:.03s}.fab-wrap.open .mini:nth-child(2){transition-delay:.06s}.fab-wrap.open .mini:nth-child(1){transition-delay:.09s}
+.modal{position:fixed;inset:0;background:rgba(5,8,20,.7);backdrop-filter:blur(6px);z-index:60;display:none;padding:70px 16px}
+.modal.show{display:block}
+.modal .box{max-width:560px;margin:0 auto;padding:14px;max-height:80vh;overflow:auto;background:var(--bg2)}
+.modal input{width:100%;padding:12px 14px;border-radius:14px;border:1px solid var(--line);background:transparent;color:var(--text);font-size:16px;margin-bottom:10px}
+.res{padding:10px 8px;border-bottom:1px solid var(--line);cursor:pointer}
+.res small{color:var(--sub);display:block}
+.toast{position:fixed;left:50%;bottom:100px;transform:translateX(-50%);background:var(--bg2);border:1px solid var(--line);padding:10px 16px;border-radius:14px;z-index:70;box-shadow:var(--shadow);display:none}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap">
+<button class="back" id="back">← 返回</button>
+<div class="logo">⚡ 學測自然 REVIEW</div>
+</div></header>
+<main class="wrap" id="app"></main>
+
+<div class="fab-wrap" id="fab">
+<button class="mini" id="fHome" title="首頁">🏠</button>
+<button class="mini" id="fSearch" title="搜尋">🔍</button>
+<button class="mini" id="fRand" title="隨機複習">🎲</button>
+<button class="mini" id="fTheme" title="深淺色">🌓</button>
+<button class="fab" id="fabBtn">＋</button>
+</div>
+
+<div class="modal" id="modal"><div class="box glass">
+<input id="q" placeholder="搜尋單元或主題，例如：板塊、DNA、酸鹼" autocomplete="off">
+<div id="results"></div>
+</div></div>
+<div class="toast" id="toast"></div>
+
+<script>
+const SUBJ={
+ physics:{name:'物理',icon:'⚛️',color:'#6ea8ff'},
+ chemistry:{name:'化學',icon:'🧪',color:'#ff8f6b'},
+ biology:{name:'生物',icon:'🧬',color:'#3ddc97'},
+ earth:{name:'地球科學',icon:'🌏',color:'#b36bff'}
+};
+const DATA={
+ physics:{ready:false,units:[]},
+ chemistry:{ready:true,units:[
+  {id:1,name:'物質的狀態、分類與分離',stars:4},
+  {id:2,name:'化學基本計算，化學發展史與基本定律',stars:4},
+  {id:3,name:'原子結構與元素週期表',stars:4},
+  {id:4,name:'化學鍵與四大物質',stars:5},
+  {id:5,name:'化學式與化學反應式',stars:5},
+  {id:6,name:'化學計量與反應熱',stars:5},
+  {id:7,name:'溶液與濃度、溶解度',stars:5},
+  {id:8,name:'電解質與氧化還原反應',stars:4},
+  {id:9,name:'水的解離與酸鹼反應',stars:4},
+  {id:10,name:'生物體與生活中的有機物',stars:4},
+  {id:11,name:'生活化學與先進科技',stars:3},
+  {id:12,name:'環境化學與永續發展',stars:3}
+ ],extra:['學測實驗活動必考重點（5星）','學測模擬試題（4星）','115學測試題（5星）']},
+ biology:{ready:true,units:[
+  {id:1,name:'細胞的構造與功能',topics:['生命現象與細胞學說','生物的尺寸與細胞形態的多樣性','真核細胞的構造','細胞中能量的獲得與轉換','光合作用與呼吸作用','染色體與染色質','細胞週期與細胞分裂','人體配子的形成與受精卵的發育','單元1探討活動']},
+  {id:2,name:'生殖與遺傳',topics:['穿越歷史的遺傳學','孟德爾的遺傳法則','孟德爾遺傳法則的延伸','遺傳的染色體學說','確認遺傳物質為DNA','DNA的複製與基因的表現','遺傳變異與環境因子影響性狀的表現','遺傳工程及其應用','單元2探討活動']},
+  {id:3,name:'演化與多樣的生物',topics:['早期演化觀念的形成與發展','達爾文演化理論的孕育','演化的證據','親緣關係的重建','單元3探討活動']}
+ ],extra:['科學探究練功坊','跨科題本','三次模考']},
+ earth:{ready:true,units:[
+  {id:1,name:'探索地球',topics:['地球的起源','地球環境的演化','探索地球歷史的方法']},
+  {id:2,name:'天文',topics:['太陽系','地球的多重屏障','銀河系與宇宙','恆星的性質——亮度與顏色','從地球看星空','多波段觀測','月相變化與日、月食']},
+  {id:3,name:'地質',topics:['地球內部構造與組成','板塊運動','地震','山崩與土石流']},
+  {id:4,name:'海洋',topics:['海洋的成分與結構','海水運動','海岸變遷','聖嬰現象']},
+  {id:5,name:'大氣',topics:['大氣的組成與結構','空氣中的水氣','大氣的水平運動','大氣的垂直運動與天氣變化','氣象預報','氣象災害——颱風與洪水']},
+  {id:6,name:'氣候變遷',topics:['氣候的變遷','短期氣候變遷','氣候變遷對環境的影響']},
+  {id:7,name:'地球資源與永續發展',topics:['善用地球資源','環境汙染與永續發展']}
+ ],extra:['學測全真模擬試題','114學年度模擬試題','115學年度學科能力測驗試題','科學探究×素養混合題']}
+};
+
+/* ===== 之後在這裡新增內容 =====
+ key 格式：科目:單元id:主題序號（沒有子主題的單元用 -1）
+ 例：'earth:3:1':{summary:'...',keypoints:['...'],formulas:['...'],quiz:[{q:'...',options:['A','B','C','D'],answer:1}]}
+*/
+const CONTENT={};
+
+const $=s=>document.querySelector(s);
+const app=$('#app');
+const store={
+ get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},
+ set(k,v){localStorage.setItem(k,JSON.stringify(v))}
+};
+let done=store.get('gsat-done',{});
+const stars=n=>'★'.repeat(n)+'☆'.repeat(5-n);
+const keyOf=(s,u,t)=>`${s}:${u}:${t}`;
+function itemsOf(s){
+ const out=[];
+ DATA[s].units.forEach(u=>{
+  if(u.topics)u.topics.forEach((t,i)=>out.push({key:keyOf(s,u.id,i),s,u,ti:i,name:t}));
+  else out.push({key:keyOf(s,u.id,-1),s,u,ti:-1,name:u.name});
+ });
+ return out;
+}
+const pct=s=>{const it=itemsOf(s);if(!it.length)return 0;return Math.round(it.filter(i=>done[i.key]).length/it.length*100)};
+function toast(m){const t=$('#toast');t.textContent=m;t.style.display='block';clearTimeout(toast.t);toast.t=setTimeout(()=>t.style.display='none',1600)}
+
+function home(){
+ const all=Object.keys(DATA).flatMap(itemsOf);
+ const d=all.filter(i=>done[i.key]).length;
+ const total=all.length?Math.round(d/all.length*100):0;
+ app.innerHTML=`
+ <h1>學測自然科複習</h1>
+ <p class="sub">物理・化學・生物・地科　一站整理</p>
+ <div class="glass ring-box"><div class="ring" style="--p:${total}"><span>${total}%</span></div>
+ <div><b>總複習進度</b><div class="sub" style="margin:4px 0 0">已完成 ${d} / ${all.length} 個主題</div></div></div>
+ <div class="grid">${Object.keys(SUBJ).map(s=>{
+  const S=SUBJ[s],D=DATA[s];
+  return `<div class="glass scard ${D.ready?'':'soon'}" style="--c:${S.color}" onclick="go('#/s/${s}')">
+   <div class="ic">${S.icon}</div><h3>${S.name}</h3>
+   <small>${D.ready?D.units.length+' 個單元':'內容準備中'}</small>
+   <div class="bar" style="--c:${S.color}"><i style="width:${pct(s)}%"></i></div></div>`}).join('')}</div>`;
+}
+
+function subject(s){
+ const S=SUBJ[s],D=DATA[s];
+ if(!D.ready){
+  app.innerHTML=`<h1>${S.icon} ${S.name}</h1><p class="sub">這個科目的空間已保留</p>
+  <div class="ph"><b>🚧 內容準備中</b>之後貼上目錄，這裡會自動長出單元與主題。<br>資料位置：DATA.physics.units</div>`;return;
+ }
+ const tab=store.get('tab-'+s,'list');
+ app.innerHTML=`<h1>${S.icon} ${S.name}</h1><p class="sub">已完成 ${pct(s)}%</p>
+ <div class="tabs"><div class="tab ${tab=='list'?'on':''}" onclick="setTab('${s}','list')">📚 單元</div>
+ <div class="tab ${tab=='map'?'on':''}" onclick="setTab('${s}','map')">🧠 心智圖</div></div>
+ <div id="sbody"></div>`;
+ const b=$('#sbody');
+ if(tab=='map'){
+  b.innerHTML=`<div class="glass sec"><div class="mm" style="--c:${S.color}"><div class="root">${S.name}</div>
+  <div class="kids">${D.units.map(u=>`<div class="kid" onclick="go('#/u/${s}/${u.id}')"><b>${u.id}. ${u.name}</b></div>`).join('')}</div></div></div>`;
+ }else{
+  b.innerHTML=D.units.map(u=>{
+   const its=itemsOf(s).filter(i=>i.u.id==u.id);
+   const n=its.filter(i=>done[i.key]).length;
+   return `<div class="glass unit ${u.topics?'':'open'}" style="--c:${S.color}" id="u${u.id}">
+    <div class="uh" onclick="toggleUnit(${u.id})"><div class="num">${u.id}</div>
+    <div class="t">${u.name}<small>${u.stars?`<span class="stars">${stars(u.stars)}</span>　`:''}${n}/${its.length} 完成</small></div>
+    <div class="chev">❯</div></div>
+    <div class="items">${its.map(i=>`<div class="item" onclick="go('#/i/${s}/${u.id}/${i.ti}')">
+     <div class="chk ${done[i.key]?'on':''}" onclick="event.stopPropagation();mark('${i.key}',this)">✓</div>
+     <div style="flex:1">${i.name}</div><span class="chev">❯</span></div>`).join('')}</div></div>`;
+  }).join('')+(D.extra?`<div class="glass sec"><h3>📎 其他練習</h3>${D.extra.map(e=>`<span class="tag" style="margin:3px">${e}</span>`).join('')}</div>`:'');
+ }
+}
+function setTab(s,t){store.set('tab-'+s,t);subject(s)}
+function toggleUnit(id){$('#u'+id).classList.toggle('open')}
+function mark(k,el){
+ done[k]=!done[k];if(!done[k])delete done[k];
+ store.set('gsat-done',done);
+ if(el)el.classList.toggle('on',!!done[k]);
+ toast(done[k]?'已完成 ✅':'取消完成');
+}
+
+function unitPage(s,uid){
+ const S=SUBJ[s],u=DATA[s].units.find(x=>x.id==uid);if(!u)return home();
+ const its=itemsOf(s).filter(i=>i.u.id==uid);
+ app.innerHTML=`<h1>${u.id}. ${u.name}</h1><p class="sub">${S.name}・心智圖</p>
+ <div class="glass sec"><div class="mm" style="--c:${S.color}"><div class="root">${u.name}</div>
+ <div class="kids">${its.map(i=>`<div class="kid ${done[i.key]?'done':''}" onclick="go('#/i/${s}/${u.id}/${i.ti}')">${i.name}</div>`).join('')}</div></div></div>`;
+}
+
+function itemPage(s,uid,ti){
+ const S=SUBJ[s],u=DATA[s].units.find(x=>x.id==uid);if(!u)return home();
+ const name=ti>=0?u.topics[ti]:u.name,key=keyOf(s,uid,ti),C=CONTENT[key]||{};
+ const note=store.get('note-'+key,'');
+ const its=itemsOf(s),idx=its.findIndex(i=>i.key==key);
+ const prev=its[idx-1],next=its[idx+1];
+ app.innerHTML=`<span class="tag">${S.name}・${u.id}. ${u.name}</span>
+ <h1>${name}</h1>
+ <div class="glass sec"><h3>📝 重點筆記</h3>${C.summary||C.keypoints?`${C.summary?`<p>${C.summary}</p>`:''}${C.keypoints?'<ul>'+C.keypoints.map(k=>`<li>${k}</li>`).join('')+'</ul>':''}`:'<div class="empty">內容待新增</div>'}
+ ${C.formulas?`<h3>🧮 公式</h3>${C.formulas.map(f=>`<div class="tag" style="margin:3px;font-size:14px">${f}</div>`).join('')}`:''}</div>
+ <div class="glass sec"><h3>📊 圖表</h3><div class="empty">圖表待新增</div></div>
+ <div class="glass sec"><h3>🧠 心智圖</h3>${C.mindmap?`<div class="mm" style="--c:${S.color}"><div class="root">${name}</div><div class="kids">${C.mindmap.map(m=>`<div class="kid">${m}</div>`).join('')}</div></div>`:'<div class="empty">心智圖待新增</div>'}</div>
+ <div class="glass sec"><h3>❓ 小測驗</h3><div id="quiz">${C.quiz?'':'<div class="empty">題目待新增</div>'}</div></div>
+ <div class="glass sec"><h3>✍️ 我的筆記</h3><textarea id="note" placeholder="寫下自己的重點、易錯點...">${note.replace(/</g,'&lt;')}</textarea></div>
+ <button class="btn" id="doneBtn">${done[key]?'取消完成':'✅ 標記為已完成'}</button>
+ <div style="display:flex;gap:10px;margin-top:10px">
+ ${prev?`<button class="btn ghost" onclick="go('#/i/${s}/${prev.u.id}/${prev.ti}')">← 上一個</button>`:''}
+ ${next?`<button class="btn ghost" onclick="go('#/i/${s}/${next.u.id}/${next.ti}')">下一個 →</button>`:''}</div>`;
+ $('#note').oninput=e=>store.set('note-'+key,e.target.value);
+ $('#doneBtn').onclick=()=>{mark(key);itemPage(s,uid,ti)};
+ if(C.quiz){
+  $('#quiz').innerHTML=C.quiz.map((q,qi)=>`<div class="quiz-q"><b>${qi+1}. ${q.q}</b>${q.options.map((o,oi)=>`<button class="opt" data-q="${qi}" data-o="${oi}">${o}</button>`).join('')}</div>`).join('');
+  document.querySelectorAll('.opt').forEach(b=>b.onclick=()=>{
+   const q=C.quiz[b.dataset.q],o=+b.dataset.o;
+   b.classList.add(o==q.answer?'right':'wrong');
+   if(o!=q.answer){const w=store.get('wrong',{});w[key+'#'+b.dataset.q]=1;store.set('wrong',w)}
+  });
+ }
+}
+
+function go(h){location.hash=h}
+function route(){
+ const p=location.hash.replace(/^#\/?/,'').split('/');
+ $('#back').style.display=p[0]?'block':'none';
+ window.scrollTo(0,0);
+ if(p[0]=='s'&&DATA[p[1]])subject(p[1]);
+ else if(p[0]=='u')unitPage(p[1],p[2]);
+ else if(p[0]=='i')itemPage(p[1],+p[2],+p[3]);
+ else home();
+}
+window.addEventListener('hashchange',route);
+$('#back').onclick=()=>history.length>1?history.back():go('#/');
+
+const fab=$('#fab');
+$('#fabBtn').onclick=()=>fab.classList.toggle('open');
+$('#fHome').onclick=()=>{fab.classList.remove('open');go('#/')};
+$('#fTheme').onclick=()=>{document.body.classList.toggle('light');store.set('light',document.body.classList.contains('light'))};
+$('#fRand').onclick=()=>{
+ fab.classList.remove('open');
+ const pool=Object.keys(DATA).flatMap(itemsOf).filter(i=>!done[i.key]);
+ if(!pool.length)return toast('全部完成了 🎉');
+ const i=pool[Math.floor(Math.random()*pool.length)];go(`#/i/${i.s}/${i.u.id}/${i.ti}`);
+};
+function openSearch(){fab.classList.remove('open');$('#modal').classList.add('show');$('#q').value='';$('#results').innerHTML='';$('#q').focus()}
+$('#fSearch').onclick=openSearch;
+$('#modal').onclick=e=>{if(e.target.id=='modal')$('#modal').classList.remove('show')};
+$('#q').oninput=e=>{
+ const v=e.target.value.trim();if(!v){$('#results').innerHTML='';return}
+ const r=Object.keys(DATA).flatMap(itemsOf).filter(i=>i.name.includes(v)||i.u.name.includes(v)).slice(0,30);
+ $('#results').innerHTML=r.length?r.map(i=>`<div class="res" onclick="$('#modal').classList.remove('show');go('#/i/${i.s}/${i.u.id}/${i.ti}')">${i.name}<small>${SUBJ[i.s].name}・${i.u.name}</small></div>`).join(''):'<div class="empty">找不到結果</div>';
+};
+if(store.get('light',false))document.body.classList.add('light');
+route();
+</script>
+</body>
+</html>
